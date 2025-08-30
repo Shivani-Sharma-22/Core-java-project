@@ -12,11 +12,12 @@ public class UserService {
             return false;
         }
         User user = new User(userName,password,fullName,contact,address);
+        userMap.put(userName,user);
         System.out.println("Registered successful");
         return true;
     }
     public boolean loginUser(String userName,String password){
-        if(userMap.containsKey(userName))
+        if(!userMap.containsKey(userName))
         {
             System.out.println("No user found with this username");
             return false;
@@ -31,9 +32,13 @@ public class UserService {
         System.out.println("Welcome: "+ currUser.getFullName() + "!");
         return true;
     }
-   private void logoutUser(){
+   public void logoutUser(){
         if(currUser != null){
             System.out.println("logged Out "+ currUser.getFullName());
+        }
+        else {
+            System.out.println("No user is currently logged in.");
+            currUser = null;
         }
         currUser = null;
    }
